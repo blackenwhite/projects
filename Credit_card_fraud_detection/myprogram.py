@@ -5,52 +5,51 @@ Created on Fri Jul 19 20:11:54 2019
 @author: NABAJYOTI
 """
 
-#importing necessary libraries
-# import the necessary packages
+
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Load the dataset from the csv file using pandas
-data = pd.read_csv('creditcard.csv')
 
-# Start exploring the dataset
+dat = pd.read_csv('creditcar.csv')
+
+
 print(data.columns)
 
-# Print the shape of the data
+
 data = data.sample(frac=0.1, random_state = 1)
 print(data.shape)
 print(data.describe())
 
-# V1 - V28 are the results of a PCA Dimensionality reduction to protect user identities and sensitive features
 
-# Plot histograms of each parameter 
+ 
 data.hist(figsize = (20, 20))
 plt.show()
 
-# Determine number of fraud cases in dataset
 
-Fraud = data[data['Class'] == 1]
-Valid = data[data['Class'] == 0]
 
-outlier_fraction = len(Fraud)/float(len(Valid))
-print(outlier_fraction)
+Fraud = dat[dat['Class'] == 1]
+Valid = dat[dat['Class'] == 0]
 
-print('Fraud Cases: {}'.format(len(data[data['Class'] == 1])))
-print('Valid Transactions: {}'.format(len(data[data['Class'] == 0])))
+outlier_fract = len(Fraud)/float(len(Valid))
+print(outlier_fract)
 
-# Correlation matrix
+print('Fraud Cases: {}'.format(len(dat[dat['Class'] == 1])))
+print('Valid Transactions: {}'.format(len(dat[dat['Class'] == 0])))
+
+
 corrmat = data.corr()
-fig = plt.figure(figsize = (12, 9))
+fig = plt.figure(figsize = (12, 8))
 
 sns.heatmap(corrmat, vmax = .8, square = True)
 plt.show()
 
-# Get all the columns from the dataFrame
+
 columns = data.columns.tolist()
 
-# Filter the columns to remove data we do not want
+
 columns = [c for c in columns if c not in ["Class"]]
 
 # Store the variable we'll be predicting on
@@ -62,23 +61,7 @@ Y = data[target]
 # Print shapes
 print(X.shape)
 print(Y.shape)
-'''
-Isolation Forest Algorithm
 
-The IsolationForest ‘isolates’ observations by randomly selecting a feature and
- then randomly selecting a split value 
-between the maximum and minimum values of the selected feature.
-
-Since recursive partitioning can be represented by a tree structure,
- the number of splittings required to isolate a sample is equivalent to the path 
- length from the root node to the terminating node.
-
-This path length, averaged over a forest of such random trees,
- is a measure of normality and our decision function.
-
-Random partitioning produces noticeably shorter paths for anomalies.
- Hence, when a forest of random trees collectively produce shorter path lengths
- for particular samples, they are highly likely to be anomalies.'''
 
 from sklearn.metrics import classification_report, accuracy_score
 from sklearn.ensemble import IsolationForest
@@ -87,22 +70,22 @@ from sklearn.neighbors import LocalOutlierFactor
 # define random states
 state = 1
 
-# define outlier detection tools to be compared
-classifiers = {
-    "Isolation Forest": IsolationForest(max_samples=len(X),
+
+classifie = {
+    "Isolation_Forest": IsolationForest(max_samples=len(X),
                                         contamination=outlier_fraction,
                                         random_state=state),
-    "Local Outlier Factor": LocalOutlierFactor(
+    "LocalOutlierFactor": LocalOutlierFactor(
         n_neighbors=20,
-        contamination=outlier_fraction)}
+        contamination=outlier_fract)}
     
-# Fit the model
+
 plt.figure(figsize=(9, 7))
 n_outliers = len(Fraud)
 
-for i, (clf_name, clf) in enumerate(classifiers.items()):
+for i, (clf_name, clf) in enumerate(classifie.items()):
     
-    # fit the data and tag outliers
+    
     if clf_name == "Local Outlier Factor":
         y_pred = clf.fit_predict(X)
         scores_pred = clf.negative_outlier_factor_
@@ -111,13 +94,11 @@ for i, (clf_name, clf) in enumerate(classifiers.items()):
         scores_pred = clf.decision_function(X)
         y_pred = clf.predict(X)
     
-    # Reshape the prediction values to 0 for valid, 1 for fraud. 
+     
     y_pred[y_pred == 1] = 0
     y_pred[y_pred == -1] = 1
     
     n_errors = (y_pred != Y).sum()
     
-    # Run classification metrics
-    print('{}: {}'.format(clf_name, n_errors))
-    print(accuracy_score(Y, y_pred))
-    print(classification_report(Y, y_pred))
+    
+    
