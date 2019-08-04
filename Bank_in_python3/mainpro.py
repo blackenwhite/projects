@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
-import os
-from tempfile import NamedTemporaryFile
-import shutil
-import csv
 
-class Account():
-    ac_no=0;
+
+class Accout():
+    ac_n=0;
     name='';
     deposit=0
     type="";
@@ -138,20 +135,8 @@ def depositAndWithdraw(num1,num2):
     
     
     
-'''def deleteAccount(num):
-    filename='Accounts.txt'
-    tempfile=NamedTemporaryFile(mode='w',delete=False)
-    fields=['Account_number','Name','Deposit','Type']
-    with open(filename,'r') as csvfile,tempfile:
-        reader=csv.DictReader(csvfile,fieldnames=fields)
-        writer = csv.DictWriter(tempfile, fieldnames=fields)
-        found=0
-        for row in reader:
-            if(row['Account_number']==num):
-                found=1
-                '''
-def deleteAccounts(num):
-    with 
+
+
                 
     
     
