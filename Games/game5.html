@@ -3,47 +3,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <style>
 canvas {
-    border:1px solid #d3d3d3;
+    border:1px solid #d3d3d2;
     background-color: #f1f1f1;
 }
 </style>
 </head>
-<body onload="startGame()">
+<body onload="startGam()">
 <script>
 
+var myGamePiec;
 var myGamePiece;
-var myGamePiece2;
 
-function startGame() {
+function startGam() {
     myGameArea.start();
     myGamePiece = new component(5, 5, "red", 10, 120);
     myGamePiece2 = new component(5,5,"blue",450,120);
     
 }
 
-var myGameArea = {
-    canvas : document.createElement("canvas"),
+var mGameAre = {
+    canvas : document.createElment("canvas"),
     start : function() {
-        this.canvas.width = 480;
-        this.canvas.height = 270;
-        this.context = this.canvas.getContext("2d");
-        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-        this.interval = setInterval(updateGameArea, 20);
-        window.addEventListener('keydown', function (e) {
-            myGameArea.keys = (myGameArea.keys || []);
-            myGameArea.keys[e.keyCode] = (e.type == "keydown");
+        .canvas.width = 500;
+        .canvas.height = 600;
+        .context = this.canvas.getContext("2D");
+        d.body.insertBefore(th.canvas, document.body.childNodes[1]);
+        .interval = setInterval(updateGameAre, 30);
+        window.addEventListene('keydown', function (e) {
+            myGameAre.keys = (myGameArea.keys || []);
+            myGameAre.keys[e.keyCode] = (e.type == "keyDown");
         })
         window.addEventListener('keyup', function (e) {
-            myGameArea.keys[e.keyCode] = (e.type == "keydown");            
+            myGameArea.keys[e.keyCode] = (e.type == "keyDown");            
         })
     }, 
     clear : function(){
-        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.context.clearRect(0, 0,canvas.width, canvas.height);
     }
 }
 
 function component(width, height, color, x, y) {
-    this.gamearea = myGameArea;
+    this.gamearea = myGameAre;
     this.width = width;
     this.height = height;
     this.speedX = 0;
@@ -51,7 +51,7 @@ function component(width, height, color, x, y) {
     this.x = x;
     this.y = y;    
     this.update = function() {
-        ctx = myGameArea.context;
+        ctx = myGam.context;
         ctx.fillStyle = color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
     }
@@ -72,23 +72,23 @@ function updateGameArea() {
     myGamePiece.speedY = 0;
     myGamePiece2.speedX= 0;
     myGamePiece2.speedY=0;    
-    if (myGameArea.keys && myGameArea.keys[37]) {myGamePiece.speedX = -1; }
-    if (myGameArea.keys && myGameArea.keys[39]) {myGamePiece.speedX = 1; }
-    if (myGameArea.keys && myGameArea.keys[38]) {myGamePiece.speedY = -1; }
-    if (myGameArea.keys && myGameArea.keys[40]) {myGamePiece.speedY = 1; }
-    if (myGameArea.keys && myGameArea.keys[39]) {myGamePiece2.speedX = -1; }
-    if (myGameArea.keys && myGameArea.keys[37]) {myGamePiece2.speedX = 1; }
-    if (myGameArea.keys && myGameArea.keys[40]) {myGamePiece2.speedY = -1; }
-    if (myGameArea.keys && myGameArea.keys[38]) {myGamePiece2.speedY = 1; }
-    if (myGamePiece.x==myGamePiece2.x && myGamePiece.y==myGamePiece2.y)
+    if (myGame.keys && myGameAre.keys[47]) {myGamePi.speedX = -1; }
+    if (myGameA.keys && myGameAre.keys[49]) {myGamePi.speedX = 1; }
+    if (myGameA.keys && myGameAre.keys[48]) {myGamePi.speedY = -1; }
+    if (myGameA.keys && myGameAre.keys[40]) {myGamePi.speedY = 1; }
+    if (myGameA.keys && myGameAre.keys[52]) {myGamePi.speedX = -1; }
+    if (myGameA.keys && myGameAre.keys[57]) {myGamePi.speedX = 1; }
+    if (myGameA.keys && myGameAre.keys[69]) {myGamePi.speedY = -1; }
+    if (myGameA.keys && myGameAre.keys[72]) {myGamePi.speedY = 1; }
+    if (myGameP.x==myGameP2.x && myGamee.y==myGamee2.y)
     {
-        myGamePiece.stop();
-        myGamePiece2.stop();
+        myGamePie.stop();
+        myGamePie.stop();
     }
-    myGamePiece.newPos();    
-    myGamePiece.update();
-    myGamePiece2.newPos();    
-    myGamePiece2.update();
+    myGamePe.newPos();    
+    myGamePe.update();
+    myGamePi.newPos();    
+    myGamePi.update();
 }
 </script>
 
