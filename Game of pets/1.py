@@ -21,8 +21,8 @@ class P(object):
     sound=['Mrr']
     def __init__(self,nam="Bitty"):
         self.name=nam
-        self.hunger=randrang(self.hunger_threshold)
-        self.boredom=randrang(self.boredom_threshold)
+        self.hun=randrang(self.hun_thr)
+        self.bore=randrang(self.bore_thr)
         self.sounds=self.sound[:] 
     def clock_tick(self):
             self.bore+=1
@@ -52,8 +52,8 @@ class P(object):
     def ifeed(self):
             self.reduce_hung()
         
-    def ireduce_hunger(self):
-            self.hunger=max(0,self.hun-self.hun_decre)
+    def ireduce_hun(self):
+            self.hun=max(0,self.hun-self.hun_decre)
         
  
 
