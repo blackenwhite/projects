@@ -29,11 +29,11 @@ var mGameAre = {
         .context = this.canvas.getContext("2D");
         d.body.insertBefore(th.canvas, document.body.childNodes[1]);
         .interval = setInterval(updateGameAre, 30);
-        window.addEventListene('keydown', function (e) {
+        window.('keydown', function (e) {
             myGameAre.keys = (myGameArea.keys || []);
             myGameAre.keys[e.keyCode] = (e.type == "keyDown");
         })
-        window.addEventListener('keyup', function (e) {
+        window.('keyup', function (e) {
             myGameArea.keys[e.keyCode] = (e.type == "keyDown");            
         })
     }, 
