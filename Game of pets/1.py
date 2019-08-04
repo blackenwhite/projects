@@ -53,7 +53,7 @@ class P(object):
             self.reduce_hung()
         
     def ireduce_hunger(self):
-            self.hunger=max(0,self.hunger-self.hunger_decrement)
+            self.hunger=max(0,self.hun-self.hun_decre)
         
  
 
