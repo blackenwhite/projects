@@ -7,13 +7,10 @@ Created on Fri Jul 19 20:11:54 2019
 
 
 
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 
-dat = pd.read_csv('creditcar.csv')
+
+dat = p.read_csv('creditcar.csv')
 
 
 print(data.columns)
@@ -52,7 +49,7 @@ columns = data.columns.tolist()
 
 columns = [c for c in columns if c not in ["Class"]]
 
-# Store the variable we'll be predicting on
+
 target = "Class"
 
 X = data[columns]
